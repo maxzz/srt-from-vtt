@@ -1,6 +1,6 @@
 import { EOL } from 'os';
 
-module.exports = function () {
+export function convertVttToSrt(fileContent: string) {
 
     let ccCount = 0;
     const regFirstLine = new RegExp(`(WEBVTT\s*(FILE)?.*)(${EOL})*`, 'g');
@@ -15,7 +15,7 @@ module.exports = function () {
         return item;
     }
 
-    var write = function write(line: string): string | undefined {
+    function convertLine(line: string): string | undefined {
 
         if (!line.trim()) {
             return;
@@ -56,10 +56,11 @@ module.exports = function () {
             }
         }
         return vttLine;
-    };
+    }
 
-    return (0, _pumpify2.default)((0, _split2.default)(), _through2.default.obj(write));
-};
+    const lines = fileContent.split(/\r?\n/);
+    return lines.map(convertLine).filter((line) => line !== undefined).join('');
+}
 
 /*
 import { EOL } from 'os';
