@@ -28,14 +28,8 @@ function checkArg(argTargets: string[]): Targets {
 }
 
 export function getTargets(): Targets {
-    // console.log('args', JSON.stringify(process.argv.slice(2), null, 4));
-    // await exitProcess(0, '');
-
     const args = require('minimist')(process.argv.slice(2), {
     });
-
-    //console.log(`args ${JSON.stringify(args, null, 4)}`);
-    //await exitProcess(0, '');
 
     const targets: Targets = checkArg(args._ || []);
 
@@ -45,8 +39,7 @@ export function getTargets(): Targets {
         targets.dirs.push(...rootFolders.subs.map((_: OsStuff.FolderItem) => _.name));
     }
 
-    // console.log(`targets ${JSON.stringify(targets, null, 4)}`);
-    // await exitProcess(0, '');
+    console.log(`targets ${JSON.stringify(targets, null, 4)}`);
 
     return targets;
 }

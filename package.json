@@ -27,12 +27,6 @@
     "bugs": {
         "url": "https://github.com/maxzz/srt-from-vtt/issues"
     },
-    "scripts": {
-        "dev": "tsc -w",
-        "build": "rm -rf dist && tsc",
-        "prepublish": "yarn build",
-        "makebin": "yarn build && pkg -t host -o srt-from-vtt dist/index.js"
-    },
     "dependencies": {
         "chalk": "^4.1.0",
         "minimist": "1.2.7",
@@ -41,5 +35,11 @@
     "devDependencies": {
         "@types/node": "18.11.3",
         "@types/rimraf": "3.0.2"
+    },
+    "scripts": {
+        "dev": "tsc -w",
+        "build": "rm -rf dist && tsc",
+        "prepublish": "yarn build",
+        "makebin": "yarn build && pkg -t host -o srt-from-vtt dist/index.js"
     }
 }

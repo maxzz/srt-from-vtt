@@ -5,7 +5,7 @@ import { Targets } from './app/app-types';
 import { getTargets } from './app/app-arguments';
 import { help } from './app/app-help';
 import { notes } from './app/app-notes';
-import { handleFiles, handleFolders } from './app/app';
+import { handleFiles, handleTargets } from './app/app';
 
 async function main() {
     const targets: Targets = getTargets();
@@ -13,7 +13,7 @@ async function main() {
     if (targets.files.length) {
         handleFiles([...targets.files, ...targets.dirs]);
     } else if (targets.dirs.length) {
-        handleFolders(targets.dirs);
+        handleTargets(targets.dirs);
     } else {
         throw newErrorArgs(`Specify at leats one folder or files name to process`);
     }
