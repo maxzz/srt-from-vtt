@@ -7,6 +7,14 @@ module.exports = function () {
     const reg2ItemsLine = /(\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2})\.(\d{3}\s*)/g;
     const reg3ItemsLine = /(\d{2}:\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2}:\d{2})\.(\d{3}\s*)/g;
 
+    function convertTimestamp(item: string) {
+        item = item.replace('.', ',');
+        if (item.split(":").length < 3) {
+            item = '00:' + item.trim();
+        }
+        return item;
+    }
+
     var write = function write(line: string): string | undefined {
 
         if (!line.trim()) {
@@ -17,26 +25,12 @@ module.exports = function () {
 
         if (line.match(reg2ItemsLine)) {
             const vttComp = line.split('-->');
-
-            vttLine = vttComp.map(function (item) {
-                item = item.replace('.', ',');
-                if (item.split(":").length < 3) {
-                    item = '00:' + item.trim();
-                }
-                return item;
-            }).join(' --> ');
+            vttLine = vttComp.map(convertTimestamp).join(' --> ');
             vttLine = vttLine + EOL;
         }
         else if (line.match(reg3ItemsLine)) {
             const vttComp = line.split('-->');
-
-            vttLine = vttComp.map(function (item) {
-                item = item.replace('.', ',');
-                if (item.split(":").length < 3) {
-                    item = '00:' + item.trim();
-                }
-                return item;
-            }).join(' --> ');
+            vttLine = vttComp.map(convertTimestamp).join(' --> ');
             vttLine = EOL + vttLine + EOL;
         }
         else if (line.match(regFirstLine)) {
@@ -45,10 +39,6 @@ module.exports = function () {
         else {
             vttLine = line + EOL;
         }
-
-
-
-
 
         if (!vttLine.trim()) {
             return;
