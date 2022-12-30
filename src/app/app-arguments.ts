@@ -27,15 +27,20 @@ function checkArg(argTargets: string[]): Targets {
     return rv;
 }
 
+export function filterVttFiles(fnames: string[]): string[] {
+    return fnames.filter((fname)=> path.extname(fname).toLowerCase() === '.vtt');
+}
+
 export function getTargets(): Targets {
     const args = require('minimist')(process.argv.slice(2), {
     });
 
     const targets: Targets = checkArg(args._ || []);
 
-    const isSingleFolderToProcess = targets.dirs.length === 1 && !targets.files.length; // If we have a single top folder (and no top files w/ drag&drop) then check what we have inside.
+    const isSingleFolderToProcess = targets.dirs.length === 1 && !targets.files.length; // If we have a single top folder (and no top files w/ drag&drop) then check what folders we have inside.
     if (isSingleFolderToProcess) {
-        let rootFolders: OsStuff.FolderItem = OsStuff.collectDirItems(targets.dirs[0]); // one of cases with 'rarsrt .'
+        const onlyDir = targets.dirs[0]; // one of cases with 'srt-from-vtt .'
+        const rootFolders: OsStuff.FolderItem = OsStuff.collectDirItems(onlyDir);
         targets.dirs.push(...rootFolders.subs.map((_: OsStuff.FolderItem) => _.name));
     }
 
