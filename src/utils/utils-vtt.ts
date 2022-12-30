@@ -2,19 +2,22 @@ import { EOL } from 'os';
 
 module.exports = function () {
 
-    var count = 0;
-    var reg = new RegExp(`(WEBVTT\s*(FILE)?.*)(${EOL})*`, 'g');
+    let ccCount = 0;
+    const regFirstLine = new RegExp(`(WEBVTT\s*(FILE)?.*)(${EOL})*`, 'g');
+    const reg2ItemsLine = /(\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2})\.(\d{3}\s*)/g;
+    const reg3ItemsLine = /(\d{2}:\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2}:\d{2})\.(\d{3}\s*)/g;
 
-    var write = function write(line, enc, cb) {
+    var write = function write(line: string): string | undefined {
 
         if (!line.trim()) {
-            return cb();
+            return;
         }
 
         let vttLine = '';
 
-        if (line.match(/(\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2})\.(\d{3}\s*)/g)) {
+        if (line.match(reg2ItemsLine)) {
             const vttComp = line.split('-->');
+
             vttLine = vttComp.map(function (item) {
                 item = item.replace('.', ',');
                 if (item.split(":").length < 3) {
@@ -24,8 +27,9 @@ module.exports = function () {
             }).join(' --> ');
             vttLine = vttLine + EOL;
         }
-        else if (line.match(/(\d{2}:\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2}:\d{2})\.(\d{3}\s*)/g)) {
+        else if (line.match(reg3ItemsLine)) {
             const vttComp = line.split('-->');
+
             vttLine = vttComp.map(function (item) {
                 item = item.replace('.', ',');
                 if (item.split(":").length < 3) {
@@ -35,8 +39,8 @@ module.exports = function () {
             }).join(' --> ');
             vttLine = EOL + vttLine + EOL;
         }
-        else if (line.match(reg)) {
-            vttLine = line.replace(reg, '');
+        else if (line.match(regFirstLine)) {
+            vttLine = line.replace(regFirstLine, '');
         }
         else {
             vttLine = line + EOL;
@@ -47,22 +51,21 @@ module.exports = function () {
 
 
         if (!vttLine.trim()) {
-            return cb();
+            return;
         }
 
         if (/^Kind:|^Language:/m.test(vttLine)) {
-            return cb();
+            return;
         }
 
         if (/^[0-9]+:/m.test(vttLine)) {
-            if (count === 0) {
-                vttLine = ++count + EOL + vttLine;
+            if (ccCount === 0) {
+                vttLine = ++ccCount + EOL + vttLine;
             } else {
-                vttLine = EOL + ++count + EOL + vttLine;
+                vttLine = EOL + ++ccCount + EOL + vttLine;
             }
         }
-
-        cb(null, vttLine);
+        return vttLine;
     };
 
     return (0, _pumpify2.default)((0, _split2.default)(), _through2.default.obj(write));
