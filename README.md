@@ -17,3 +17,7 @@ or build an executable file using [pkg](https://www.npmjs.com/package/pkg)
 ### Usage
 
 ```srt-from-vtt <folder(s)>```
+
+### Credits, References
+
+* Convert WebVTT (The Web Video Text Tracks Format, aka html5 video subtitles) into SubRip SRT [vtt-to-srt](https://github.com/riazXrazor/vtt-to-srt).

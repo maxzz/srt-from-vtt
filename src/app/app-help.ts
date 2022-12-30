@@ -2,7 +2,7 @@ import chalk from 'chalk';
 
 //const cfg = require('../../package.json'); // avoid the whole file include
 const PROGRAM_VERSION = "1.0.0";
-const PROGRAM_NAME = 'srt-fron-vtt';
+const PROGRAM_NAME = 'srt-from-vtt';
 
 export function help() {
     let help = `
