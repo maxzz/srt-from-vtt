@@ -2,7 +2,7 @@ import path from 'path';
 import fs from 'fs';
 import chalk from 'chalk';
 import rimraf from 'rimraf';
-import { fnames } from '../utils/utils-os';
+import { fnames, replaceExt } from '../utils/utils-os';
 import { removeIndent } from '../utils/utils-es6';
 import { OsStuff } from '../utils/utils-os-stuff';
 import { notes } from './app-notes';
@@ -18,16 +18,27 @@ function handleVttFile(fname: string) {
     const cnt = fs.readFileSync(fname, { encoding: 'utf-8' });
     const newCnt = convertVttToSrt(cnt);
 
-    const newName = path.join(path.dirname(fname), path.basename(fname, '.vtt') + '.srt');
-    fs.writeFileSync(newName, newCnt);
+    let newName = replaceExt(fname, '.srt');
+    console.log('newName',newName);
 
-    fs.unlinkSync(fname);
-    
-    console.log('newName', newName);
+    newName = replaceExt(fname, '');
+    console.log('newName',newName);
+
+    newName = replaceExt('fname', '.srt');
+    console.log('newName',newName);
+
+    newName = replaceExt('fname.', '.srt');
+    console.log('newName',newName);
+
+    // fs.writeFileSync(newName, newCnt);
+
+    // fs.unlinkSync(fname);
 }
 
 function handleFolder(targetFolder: string) {
     let lastFolder = path.basename(targetFolder) || targetFolder;
+
+    // let fItems: FItem[] = filesAndFolders.files.map((_: OsStuff.FileItem) => ({ ..._, ext: fnames.castFileExtension(path.extname(_.short)) }));
 
     // let final: MSPair[] = getMSPairs(targetFolder);
 
