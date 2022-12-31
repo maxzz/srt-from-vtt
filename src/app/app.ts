@@ -16,9 +16,14 @@ function handleVttFile(fname: string) {
         return;
     }
     const cnt = fs.readFileSync(fname, { encoding: 'utf-8' });
-    const newcnt = convertVttToSrt(cnt);
+    const newCnt = convertVttToSrt(cnt);
 
-    console.log('newcnt', newcnt);
+    const newName = path.join(path.dirname(fname), path.basename(fname, '.vtt') + '.srt');
+    fs.writeFileSync(newName, newCnt);
+
+    fs.unlinkSync(fname);
+    
+    console.log('newName', newName);
 }
 
 function handleFolder(targetFolder: string) {

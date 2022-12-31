@@ -1,4 +1,4 @@
 export type Targets = {
-    files: string[];    // resolved full path and file names
-    dirs: string[];     // resolved full dir names
+    files: string[];    // resolved fully qualified filenames
+    dirs: string[];     // resolved fully qualified dir names
 };
