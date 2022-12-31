@@ -9,7 +9,7 @@ import { handleTargets } from './app/app';
 
 async function main() {
     const targets: Targets = getTargets();
-    await handleTargets(targets);
+    handleTargets(targets);
 
     if (notes.willShow()) {
         if (targets.dirs.length) {
