@@ -9,7 +9,7 @@ import { handleTargets } from './app/app';
 
 async function main() {
     const targets: Targets = getTargets();
-    handleTargets(targets);
+    await handleTargets(targets);
 
     if (notes.willShow()) {
         if (targets.dirs.length) {
@@ -28,3 +28,5 @@ main().catch(async (error) => {
     const errorMsg = `${notes.buildMessage()}${chalk[error.args ? 'yellow' : 'red'](`\n${error.message}`)}`;
     await exitProcess(1, errorMsg);
 });
+
+//TODO: remove extra trace and add nice output
