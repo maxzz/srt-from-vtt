@@ -15,8 +15,9 @@
             "outFiles": [
                 "${workspaceFolder}/**/*.js"
             ],
-            "args": ["tests/1"],
-            // "args": ["tests/1/lesson01.vtt"],
+            // "args": ["tests/1"],
+            "args": ["tests/1/lesson01.vtt"],
+
             // "args": ["."],
             "console": "externalTerminal"
         }

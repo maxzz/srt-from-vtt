@@ -1,0 +1,151 @@
+1
+00:00:05,130 --> 00:00:10,350
+Hello and welcome to the school's Understanded CAPM NOGs package manager.
+
+2
+00:00:10,830 --> 00:00:14,220
+My name is Mukden and I will be an instructor during the school's.
+
+3
+00:00:15,320 --> 00:00:22,070
+In this course, we will answer several important questions, first one, how you can initialize your
+
+4
+00:00:22,070 --> 00:00:23,450
+project using NPM.
+
+5
+00:00:24,080 --> 00:00:26,010
+What is the package JSON file?
+
+6
+00:00:26,840 --> 00:00:32,720
+We will discuss semantic versioning and you will understand what is the difference between major minor
+
+7
+00:00:32,720 --> 00:00:34,370
+and software versions.
+
+8
+00:00:34,970 --> 00:00:39,470
+And I'll explain you in which cases, which version should be updated.
+
+9
+00:00:40,410 --> 00:00:46,560
+You will also understand what special characters such as Steel or Garratt mean when they used along
+
+10
+00:00:46,560 --> 00:00:47,160
+with package.
+
+11
+00:00:48,510 --> 00:00:55,150
+I will also answer a very common question why not modules folder is so large and why it shouldn't be
+
+12
+00:00:55,150 --> 00:00:56,940
+committed to source control systems.
+
+13
+00:00:57,870 --> 00:01:02,970
+We will talk about difference between dependencies and development dependencies, and you will clearly
+
+14
+00:01:02,970 --> 00:01:08,840
+understand, in which case you should add baggage as dependency and in which cases as development dependency.
+
+15
+00:01:09,630 --> 00:01:15,000
+In order to answer this question, we will talk about difference between browser applications and several
+
+16
+00:01:15,000 --> 00:01:21,210
+packages, and you'll get a challenge to create one of the browser applications yourself and you will
+
+17
+00:01:21,210 --> 00:01:23,320
+not use any external modules for that.
+
+18
+00:01:24,330 --> 00:01:26,730
+I will also explain purpose of the package.
+
+19
+00:01:26,730 --> 00:01:29,340
+This log, the JSON file or in Yoran.
+
+20
+00:01:29,340 --> 00:01:30,570
+It is young but log.
+
+21
+00:01:31,640 --> 00:01:38,100
+You'll understand how this files helps you to keep same software packages, viruses on different computers.
+
+22
+00:01:39,500 --> 00:01:45,240
+But what about and postscripts probably have seen such a long list of scripts in the package.
+
+23
+00:01:45,980 --> 00:01:49,940
+What is the purpose of each script, how it is used, how it is executed?
+
+24
+00:01:50,960 --> 00:01:58,520
+In this growth, we will talk about built in a script such as start, start, start, stop, restart
+
+25
+00:01:58,520 --> 00:01:59,100
+and so on.
+
+26
+00:02:00,050 --> 00:02:04,850
+We will also discuss KOSTERMAN film scripts and you will create several scripts yourself.
+
+27
+00:02:05,820 --> 00:02:10,110
+We will also discuss how you can combine different scripts in a one script.
+
+28
+00:02:11,300 --> 00:02:17,090
+We will discuss the purpose of the DOD Benfold, the load modules folder, and I'll explain to you what
+
+29
+00:02:17,090 --> 00:02:18,350
+is executable script.
+
+30
+00:02:19,100 --> 00:02:23,000
+Probably earlier you have seen such a line in the executable script.
+
+31
+00:02:23,420 --> 00:02:28,100
+And in this course, I'll explain you how it is used on Windows and on Mac.
+
+32
+00:02:29,000 --> 00:02:34,400
+And this girls, I'll give you several challenges and you'll need to complete each of them yourself,
+
+33
+00:02:35,000 --> 00:02:36,200
+but of course, no worries.
+
+34
+00:02:36,250 --> 00:02:39,070
+We'll talk about solution of each challenge together.
+
+35
+00:02:40,130 --> 00:02:44,070
+If you want to become an expert in the game, please joins us now.
+
+36
+00:02:44,070 --> 00:02:48,400
+Now, if you would like it, I'll give you a sort of day money back guarantee.
+
+37
+00:02:48,680 --> 00:02:51,890
+So please enroll now and see you inside.
+
+38
+00:02:52,640 --> 00:02:53,120
+Good luck.

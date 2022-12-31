@@ -1,63 +1,72 @@
 import { EOL } from 'os';
 
-export function convertVttToSrt(fileContent: string): string {
+type Context = {
+    ccCount: number;
+    hasfixes: boolean;  // file has default hour timestamps (i.e. mm:ss,ms wo/ hh:)
+}
 
-    let ccCount = 0;
-    const regFirstLine = new RegExp(`(WEBVTT\s*(FILE)?.*)(${EOL})*`, 'g');
-    const reg2ItemsLine = /(\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2})\.(\d{3}\s*)/g;
-    const reg3ItemsLine = /(\d{2}:\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2}:\d{2})\.(\d{3}\s*)/g;
+const regFirstLine = new RegExp(`(WEBVTT\s*(FILE)?.*)(${EOL})*`, 'g');
+const reg2ItemsLine = /(\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2})\.(\d{3}\s*)/g;
+const reg3ItemsLine = /(\d{2}:\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2}:\d{2})\.(\d{3}\s*)/g;
 
-    function convertTimestamp(item: string) {
-        item = item.replace('.', ',');      // '00:05.130 ' -> '00:05,130 ' || ' 00:10.350' -> ' 00:10,350'
-        if (item.split(":").length < 3) {
-            item = '00:' + item.trim();     // '00:00:05,130' || '00:00:10,350'
-        }
-        return item;
+function convertTimestamp(item: string, context: Context) {
+    item = item.replace('.', ',');      // '00:05.130 ' -> '00:05,130 ' || ' 00:10.350' -> ' 00:10,350'
+    if (item.split(":").length < 3) {
+        item = '00:' + item.trim();     // '00:00:05,130' || '00:00:10,350'
+    }
+    return item;
+}
+
+function convertLine(line: string, context: Context): string | undefined {
+
+    if (!line.trim()) {
+        return;
     }
 
-    function convertLine(line: string): string | undefined {
+    let vttLine = '';
 
-        if (!line.trim()) {
-            return;
-        }
+    if (line.match(reg2ItemsLine)) {
+        const vttComp = line.split('-->');
+        vttLine = vttComp.map((part) => convertTimestamp(part, context)).join(' --> ');
+        vttLine = vttLine + EOL;
+    }
+    else if (line.match(reg3ItemsLine)) {
+        const vttComp = line.split('-->');
+        vttLine = vttComp.map((part) => convertTimestamp(part, context)).join(' --> ');
+        vttLine = EOL + vttLine + EOL;
+    }
+    else if (line.match(regFirstLine)) {
+        vttLine = line.replace(regFirstLine, '');
+    }
+    else {
+        vttLine = line + EOL;
+    }
 
-        let vttLine = '';
+    if (!vttLine.trim()) {
+        return;
+    }
 
-        if (line.match(reg2ItemsLine)) {
-            const vttComp = line.split('-->');
-            vttLine = vttComp.map(convertTimestamp).join(' --> ');
-            vttLine = vttLine + EOL;
-        }
-        else if (line.match(reg3ItemsLine)) {
-            const vttComp = line.split('-->');
-            vttLine = vttComp.map(convertTimestamp).join(' --> ');
-            vttLine = EOL + vttLine + EOL;
-        }
-        else if (line.match(regFirstLine)) {
-            vttLine = line.replace(regFirstLine, '');
-        }
-        else {
-            vttLine = line + EOL;
-        }
+    if (/^Kind:|^Language:/m.test(vttLine)) {
+        return;
+    }
 
-        if (!vttLine.trim()) {
-            return;
+    if (/^[0-9]+:/m.test(vttLine)) {
+        if (context.ccCount === 0) {
+            vttLine = ++context.ccCount + EOL + vttLine; // '1\r\n00:00:05,130 --> 00:00:10,350\r\n'
+        } else {
+            vttLine = EOL + ++context.ccCount + EOL + vttLine;
         }
+    }
+    return vttLine;
+}
 
-        if (/^Kind:|^Language:/m.test(vttLine)) {
-            return;
-        }
+export function convertVttToSrt(fileContent: string): string {
 
-        if (/^[0-9]+:/m.test(vttLine)) {
-            if (ccCount === 0) {
-                vttLine = ++ccCount + EOL + vttLine; // '1\r\n00:00:05,130 --> 00:00:10,350\r\n'
-            } else {
-                vttLine = EOL + ++ccCount + EOL + vttLine;
-            }
-        }
-        return vttLine;
+    const context: Context = {
+        ccCount: 0,
+        hasfixes: false,
     }
 
     const lines = fileContent.split(/\r?\n/);
-    return lines.map(convertLine).filter((line) => line !== undefined).join('');
+    return lines.map((line) => convertLine(line, context)).filter((line) => line !== undefined).join('');
 }
