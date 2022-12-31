@@ -20,7 +20,7 @@ function handleVttFile(fname: string) {
     const newCnt = convertVttToSrt(cnt);
     const newName = replaceExt(fname, '.srt');
 
-    fs.writeFileSync(newName, newCnt);
+    fs.writeFileSync(newName, newCnt.newContent);
     //fs.unlinkSync(fname); // Don't remove original file: sometimes vtt format can be broken
 }
 

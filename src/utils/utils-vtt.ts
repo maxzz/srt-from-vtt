@@ -61,7 +61,12 @@ function convertLine(line: string, context: Context): string | undefined {
     return vttLine;
 }
 
-export function convertVttToSrt(fileContent: string): string {
+export type ConvertResult = {
+    newContent: string;
+    hasFixes: boolean;
+}
+
+export function convertVttToSrt(fileContent: string): ConvertResult {
 
     const context: Context = {
         ccCount: 0,
@@ -69,5 +74,8 @@ export function convertVttToSrt(fileContent: string): string {
     };
 
     const lines = fileContent.split(/\r?\n/);
-    return lines.map((line) => convertLine(line, context)).filter((line) => line !== undefined).join('');
+    return {
+        newContent: lines.map((line) => convertLine(line, context)).filter((line) => line !== undefined).join(''),
+        hasFixes: context.hasFixes,
+    };
 }
