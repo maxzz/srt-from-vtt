@@ -17,7 +17,7 @@ function handleVttFile(fname: string) {
     }
 
     const cnt = fs.readFileSync(fname, { encoding: 'utf-8' });
-    const newCnt = convertVttToSrt(cnt);
+    const newCnt = convertVttToSrt(cnt, true);
     const newName = replaceExt(fname, '.srt');
 
     fs.writeFileSync(newName, newCnt.newContent);

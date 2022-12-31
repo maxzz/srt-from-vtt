@@ -17,6 +17,7 @@
             ],
             // "args": ["tests/1"],
             "args": ["tests/1/lesson01.vtt"],
+            // "args": ["tests/1/lesson7-broken.vtt"],
 
             // "args": ["."],
             "console": "externalTerminal"

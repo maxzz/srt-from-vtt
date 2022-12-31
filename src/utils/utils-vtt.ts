@@ -61,12 +61,27 @@ function convertLine(line: string, context: Context): string | undefined {
     return vttLine;
 }
 
+function fixVttLine(line: string, context: Context): string {
+    if (!line.trim()) {
+        return line;
+    }
+
+    let vttLine = line;
+
+    if (line.match(reg2ItemsLine)) {
+        const vttComp = line.split('-->');
+        vttLine = vttComp.map((part) => convertTimestamp(part, context)).join(' --> ');
+    }
+
+    return vttLine;
+}
+
 export type ConvertResult = {
     newContent: string;
     hasFixes: boolean;
-}
+};
 
-export function convertVttToSrt(fileContent: string): ConvertResult {
+export function convertVttToSrt(fileContent: string, makeSrtOrFix: boolean): ConvertResult {
 
     const context: Context = {
         ccCount: 0,
@@ -74,8 +89,13 @@ export function convertVttToSrt(fileContent: string): ConvertResult {
     };
 
     const lines = fileContent.split(/\r?\n/);
+
+    const newContent = makeSrtOrFix
+        ? lines.map((line) => convertLine(line, context)).filter((line) => line !== undefined).join('')
+        : lines.map((line) => fixVttLine(line, context)).filter((line) => line !== undefined).join(EOL);
+
     return {
-        newContent: lines.map((line) => convertLine(line, context)).filter((line) => line !== undefined).join(''),
+        newContent,
         hasFixes: context.hasFixes,
     };
 }

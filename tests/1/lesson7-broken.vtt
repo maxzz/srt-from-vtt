@@ -1,0 +1,541 @@
+WEBVTT
+
+0
+00:05.381 --> 00:10.340
+In this lesson, we will look at the main string data type in Unreal Engine - FString,
+
+1
+00:10.340 --> 00:15.000
+but before we start, let's create our own logging category.
+
+2
+00:16.540 --> 00:26.250
+To do this, go to the top of the BaseGeometryActor.cpp file and enter DEFINE_LOG_CATEGORY_STATIC
+
+3
+00:26.250 --> 00:30.692
+This macro is responsible for creating a local logging category,
+
+4
+00:31.603 --> 00:37.570
+a category that is available only within this .cpp file. We can also create a
+
+5
+00:37.570 --> 00:42.760
+global logging category of the LogTemp type, which will be available in every project file,
+
+6
+00:42.760 --> 00:48.560
+but so far we do not have such a need. The static category is enough for us. This macro
+
+7
+00:48.560 --> 00:54.860
+takes three arguments. The first is the category name. You can set absolutely any
+
+8
+00:54.860 --> 01:01.060
+name here. Let's call it LogBaseGeometry. The second and third arguments mean the
+
+9
+01:01.060 --> 01:07.282
+maximum allowed logging level. Let's temporarily maintain Error and Error for now.
+
+10
+01:09.038 --> 01:16.289
+Select our macro, press F12 - the insides of the macro open. Find ELogVerbosity here.
+
+11
+01:16.960 --> 01:23.655
+Also press F12. In the pop-up window, double-click LogVerbosity.h
+
+12
+01:23.655 --> 01:30.290
+I will open this file parallel to the body of our main BaseGeometry actor. Let's take a look at what's
+
+13
+01:30.290 --> 01:37.910
+inside the LogVerbosity. This defines the ELogVerbosity enum, which contains all the main
+
+14
+01:37.910 --> 01:43.747
+logging levels available in the Unreal Engine. We've already worked with display, warning and error.
+
+15
+01:44.360 --> 01:49.550
+These levels will be enough for our project. Other levels are needed for more fine
+
+16
+01:49.550 --> 01:54.800
+tuning and are actually used very rarely. So what is the maximum
+
+17
+01:54.800 --> 02:01.220
+allowed logging level? Suppose we want to display a message from the
+
+18
+02:01.220 --> 02:08.754
+LogBaseGeometry category we just created. Let's set the logging level to display.
+
+19
+02:10.000 --> 02:15.620
+And we will display an arbitrary message. Let it be info. What happens in this
+
+20
+02:15.620 --> 02:19.610
+situation with our message? Our message will not be displayed.
+
+21
+02:20.637 --> 02:26.490
+Why is this happening? Let's take a look at our verbosity enum. We know that each enum element
+
+22
+02:26.490 --> 02:34.105
+corresponds to some number, for example, NoLogging is 0, Fatal is 1, Error is 2, and Display is 4.
+
+23
+02:34.560 --> 02:40.740
+We have limited our category to the Error logging level, that is, two, and
+
+24
+02:40.740 --> 02:46.990
+we want to output to the log message using the Display log level. Our Display level has
+
+25
+02:46.990 --> 02:52.491
+an enum value of 4. Four, respectively, is greater than two, so nothing will be displayed.
+
+26
+02:52.930 --> 02:59.860
+In fact, we limited our logging category to three acceptable levels: Error, Fatal,
+
+27
+02:59.860 --> 03:04.217
+which is less than Error, and NoLogging, which is also less than Error.
+
+28
+03:05.381 --> 03:10.930
+The third argument is also the maximum allowed logging level. This option is more restrictive
+
+29
+03:10.930 --> 03:17.850
+because it is compile-time. In our particular case, the maximum allowable
+
+30
+03:17.850 --> 03:23.472
+logging levels are equal for us, so a more stringent parameter will work - the compilation level
+
+31
+03:24.270 --> 03:29.040
+and the body of our log will simply not be added to the program code. The compiler will ignore
+
+32
+03:29.040 --> 03:35.216
+this macro. We will not limit our category to the Error level.
+
+33
+03:36.448 --> 03:39.457
+If we look at our enum, we can see at the bottom
+
+34
+03:39.457 --> 03:46.590
+that there is an All value. It is large enough, equal to 7, for a given value of the
+
+35
+03:46.590 --> 03:52.650
+maximum allowable logging level, all the levels we need will be exactly available.
+
+36
+03:54.463 --> 04:00.900
+Therefore, it is appropriate to specify All, All. With this value, all messages that we need will be displayed and
+
+37
+04:00.900 --> 04:08.759
+all macros are compiled. Let's delete our temporary log, we won't need it anymore.
+
+38
+04:10.000 --> 04:16.841
+Let's move on to working with strings. Unreal has several types of strings: FString, FName, FText. Everything
+
+39
+04:16.841 --> 04:23.450
+we do will be considered in this course. Now let's create a variable Name of the FString type, assign it
+
+40
+04:23.450 --> 04:29.602
+some string literal, for example, John Conor and print this variable to the console.
+
+41
+04:30.762 --> 04:35.550
+FString can be thought of as analogous to std :: string in the standard library.
+
+42
+04:35.550 --> 04:40.917
+This is a container of symbols. Unreal uses its own TCHAR type for symbols.
+
+43
+04:41.978 --> 04:47.009
+FString has broad functionality. There are many convenient functions for working with strings,
+
+44
+04:47.700 --> 04:53.410
+some of which we will work with in this course. We print UE_LOG, use our
+
+45
+04:53.410 --> 05:01.040
+LogBaseGeometry category. Let the logging level be Display - there will be a regular
+
+46
+05:01.040 --> 05:09.580
+text message. We type the TEXT macro we already know. We print Name: the format specifier
+
+47
+05:09.580 --> 05:17.420
+for outputting strings% s and we need to specify our Name argument, separated by commas. UE_LOG does not know how to
+
+48
+05:17.420 --> 05:23.900
+directly output FString, it works with the TCHAR array, to get a pointer to the TCHAR array,
+
+49
+05:23.900 --> 05:30.980
+we need to apply the * operator before the string. If we hover over the * operator and press F12,
+
+50
+05:31.750 --> 05:37.240
+then we will get into the unreal string header file and as we see the * operator returns a pointer
+
+51
+05:37.240 --> 05:44.368
+to the first element of the TCHAR array of our string. We are saved. Launch editor.
+
+52
+05:46.435 --> 05:51.410
+Editor launched. Let's check that everything is displayed correctly. Open the log, clear
+
+53
+05:51.410 --> 05:58.330
+it, launch the project. Scroll down and see the penultimate line this is what we have
+
+54
+05:58.330 --> 06:04.870
+logged LogBaseGeometry: Display Name: John Conor. Moreover, now our category LogBaseGeometry
+
+55
+06:04.870 --> 06:10.480
+is presented in the list of all log categories. We can filter out the log, leaving only our log
+
+56
+06:10.480 --> 06:17.150
+category. We select LogBaseGeometry and our log is clean, only with our line.
+
+57
+06:20.371 --> 06:23.350
+We continue working with strings. Let's copy the variables
+
+58
+06:23.350 --> 06:27.240
+we created in the last tutorial into the BeginPlay function. The only thing is,
+
+59
+06:27.240 --> 06:32.970
+I'll remove the repeated type int and bool, the output for them will be the same, so we just won't
+
+60
+06:32.970 --> 06:46.594
+waste time on it. Create a variable of type FString - WeaponsNumStr, type weapons num =
+
+61
+06:46.594 --> 06:51.247
+Now we need to get a string from an int, because the plus operator can concatenate strings,
+
+62
+06:51.247 --> 06:55.000
+but cannot concatenate a string and int, a string and a float.
+
+63
+06:56.130 --> 07:01.851
+We will use a static function of the FString class called FromInt.
+
+64
+07:02.910 --> 07:07.650
+This function takes int as an argument and returns FString.
+
+65
+07:07.650 --> 07:12.307
+Therefore, we will simply pass our WeaponsNum variable to this function.
+
+66
+07:13.983 --> 07:22.179
+Create the HealthStr variable in the same way. We print Health =
+
+67
+07:22.179 --> 07:27.670
+Now we need to convert to FString floats. For this, in the FString class there is a
+
+68
+07:27.670 --> 07:31.062
+static function called SanitizeFloat.
+
+69
+07:32.493 --> 07:37.330
+It takes a double as an argument, but this function suits us, because float
+
+70
+07:37.330 --> 07:42.644
+will be automatically converted to double type. Therefore, we simply enter Health
+
+71
+07:44.980 --> 07:50.383
+and create a third variable of type FString IsDeadStr.
+
+72
+07:52.253 --> 07:57.900
+Assign the first informative part to it. Is Dead
+
+73
+08:00.956 --> 08:02.593
+equals
+
+74
+08:03.560 --> 08:10.160
+Next, we create a string in place, use the FString constructor and pass
+
+75
+08:10.160 --> 08:17.420
+, for example, true to it. Our string is now "Is Dead = true". Let's add a
+
+76
+08:17.420 --> 08:27.270
+condition. We print IsDead and use the trenar operator? which essentially works like an if. If the
+
+77
+08:27.270 --> 08:35.852
+condition is true, then the operand after? if false, then after:
+
+78
+08:37.127 --> 08:46.643
+Accordingly, we will construct a string with either true or false. Create an additional FString Stat variable
+
+79
+08:47.470 --> 08:50.455
+and construct it using our strings.
+
+80
+08:51.060 --> 08:55.924
+To do this, we will use the static function FString called printf.
+
+81
+08:56.887 --> 09:04.370
+This function is used to format strings, it works by analogy with UE_LOG,
+
+82
+09:04.370 --> 09:10.670
+that is, in the first argument we pass a string with format specifiers, and then,
+
+83
+09:10.670 --> 09:18.070
+separated by commas, indicate all the arguments that we want to output. We print All stat,
+
+84
+09:18.565 --> 09:25.640
+add the line output specifier% s We will have three lines and add our arguments separated
+
+85
+09:25.640 --> 09:34.457
+by commas, do not forget to use the operator * The first argument is WeaponsNumStr.
+
+86
+09:36.157 --> 09:44.853
+The second argument is HealthStr and the third argument is IsDeadStr.
+
+87
+09:48.970 --> 09:52.887
+Let's make our line a little more beautiful.
+
+88
+09:54.091 --> 09:58.340
+We can also add a line break character \ n
+
+89
+10:00.097 --> 10:04.749
+Let's add a line break before each variable output
+
+90
+10:05.940 --> 10:12.425
+so that each variable is printed on a new line in the console and output the Stat variable to our UE_LOG.
+
+91
+10:14.770 --> 10:20.620
+Let's use our category naturally LogBaseGeometry. LogVerbosity let it be
+
+92
+10:20.620 --> 10:26.156
+Warning - it will be highlighted in yellow, it will be more noticeable. We print our TEXT macro
+
+93
+10:27.640 --> 10:32.746
+and the line will be the only% s format specifier.
+
+94
+10:34.120 --> 10:38.110
+Pass our Stat line as an argument.
+
+95
+10:40.740 --> 10:43.494
+Save and run editor.
+
+96
+10:46.970 --> 10:53.860
+Our editor reopened. Let's run our project and open output log. All information
+
+97
+10:53.860 --> 11:02.299
+that we wanted to display was added to the console: WeaponsNum, Health and IsDead. We close our editor.
+
+98
+11:02.670 --> 11:06.390
+The last thing we will do with you in this tutorial is to display a message on the screen,
+
+99
+11:06.390 --> 11:13.440
+but in a slightly different way. In Unreal, you can display a message directly on top of the game screen. This is done
+
+100
+11:13.440 --> 11:18.840
+using a pointer to the global engine object called GEngine. Let's
+
+101
+11:18.840 --> 11:27.767
+first include the header file so that this object can be accessed #include "Engine / Engine.h"
+
+102
+11:28.901 --> 11:30.678
+The function that prints the message to the
+
+103
+11:30.678 --> 11:39.160
+screen is called AddOnScreenDebugMessage. The first argument is a unique message key. This
+
+104
+11:39.160 --> 11:44.790
+argument allows messages with the same keys not to be displayed repeatedly. Now
+
+105
+11:44.790 --> 11:51.190
+we are not interested in this feature, so let's specify -1. This means that the message has
+
+106
+11:51.190 --> 11:55.390
+no key and is guaranteed to be displayed on the screen. The next parameter is the number of seconds the
+
+107
+11:55.390 --> 12:00.880
+message will keep on the screen. Let's put, for example, 3. The next parameter is
+
+108
+12:00.880 --> 12:07.300
+the color of the message. FColor is one of the engine types designed for defining colors.
+
+109
+12:08.050 --> 12:13.990
+If we look at the constructors that are in the type in FColor, we will see that, for example, in one
+
+110
+12:13.990 --> 12:23.124
+of them we can set a color using the rgba components - red green blue alpha,
+
+111
+12:23.124 --> 12:28.817
+but for some standard colors it is more convenient and understandable to use statically certain constants.
+
+112
+12:29.186 --> 12:35.390
+For example, Red. If we press F12, then we will get to the attached file, where the most frequently
+
+113
+12:35.390 --> 12:41.060
+used colors are defined . We can use them. The next parameter is directly the string
+
+114
+12:41.060 --> 12:47.930
+that we want to display as a message. Let's print our name line. As we can see,
+
+115
+12:47.930 --> 12:52.610
+this parameter is already FString, that is, we do not need to do any additional
+
+116
+12:52.610 --> 12:58.743
+conversions to the TCHAR array. The next two parameters can generally be left at their defaults.
+
+117
+12:58.743 --> 13:05.251
+The first of them means the order of output, that is, new lines at the top, or new lines at the bottom.
+
+118
+13:05.942 --> 13:12.187
+The second of the remaining arguments is scale, that is, we can slightly change the size of our message,
+
+119
+13:12.187 --> 13:20.050
+using the FVector2D type. This type stores two numbers: x, y. It can be used in any
+
+120
+13:20.050 --> 13:26.138
+suitable cases, be it a vector, a coordinate in 2d space, or passing parameters of a scale.
+
+121
+13:28.375 --> 13:37.497
+Let's also display a message with our Stat line and slightly change the parameters of the debug message.
+
+122
+13:39.891 --> 13:46.314
+Keep the message on the screen for 5 seconds. Change the color to green - green.
+
+123
+13:47.730 --> 13:51.043
+Leave the next argument by default - true.
+
+124
+13:52.620 --> 13:56.139
+And let's change the scale of this message.
+
+125
+13:56.770 --> 14:02.982
+Let's use the FVector2D constructor and increase our message proportionally by one and a half times.
+
+126
+14:04.550 --> 14:07.735
+Save and run our editor.
+
+127
+14:10.893 --> 14:12.942
+Press the play button.
+
+128
+14:13.254 --> 14:20.000
+And we see that two messages are displayed right on top of the screen. One of them is green, the other is red.
+
+129
+14:20.000 --> 14:26.190
+One message is enlarged, the other is not. And John Conor disappears earlier, because we
+
+130
+14:26.190 --> 14:32.790
+indicated fewer seconds for this message. Close editor. The last thing we will do with you is
+
+131
+14:32.790 --> 14:41.087
+our little ritual. Let's refactor the code we have written. We create the printStringTypes function.
+
+132
+14:48.471 --> 14:52.241
+We remove all the code that we wrote in the body of BeginPlay
+
+133
+14:53.323 --> 14:56.520
+into our printStringTypes function.
+
+134
+14:59.707 --> 15:05.735
+And also add the declaration of this function to the BaseGeometryActor.h header file
