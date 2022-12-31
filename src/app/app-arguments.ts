@@ -27,10 +27,6 @@ function checkArg(argTargets: string[]): Targets {
     return rv;
 }
 
-export function filterVttFiles(fnames: string[]): string[] {
-    return fnames.filter((fname) => path.extname(fname).toLowerCase() === '.vtt');
-}
-
 export function getTargets(): Targets {
     const args = require('minimist')(process.argv.slice(2), {
     });
