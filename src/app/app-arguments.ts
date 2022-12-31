@@ -28,7 +28,7 @@ function checkArg(argTargets: string[]): Targets {
 }
 
 export function filterVttFiles(fnames: string[]): string[] {
-    return fnames.filter((fname)=> path.extname(fname).toLowerCase() === '.vtt');
+    return fnames.filter((fname) => path.extname(fname).toLowerCase() === '.vtt');
 }
 
 export function getTargets(): Targets {

@@ -8,9 +8,9 @@ export function convertVttToSrt(fileContent: string): string {
     const reg3ItemsLine = /(\d{2}:\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2}:\d{2})\.(\d{3}\s*)/g;
 
     function convertTimestamp(item: string) {
-        item = item.replace('.', ',');
+        item = item.replace('.', ',');      // '00:05.130 ' -> '00:05,130 ' || ' 00:10.350' -> ' 00:10,350'
         if (item.split(":").length < 3) {
-            item = '00:' + item.trim();
+            item = '00:' + item.trim();     // '00:00:05,130' || '00:00:10,350'
         }
         return item;
     }
@@ -50,7 +50,7 @@ export function convertVttToSrt(fileContent: string): string {
 
         if (/^[0-9]+:/m.test(vttLine)) {
             if (ccCount === 0) {
-                vttLine = ++ccCount + EOL + vttLine;
+                vttLine = ++ccCount + EOL + vttLine; // '1\r\n00:00:05,130 --> 00:00:10,350\r\n'
             } else {
                 vttLine = EOL + ++ccCount + EOL + vttLine;
             }
