@@ -40,7 +40,7 @@ export function getTargets(): Targets {
         targets.dirs.push(...rootFolders.subs.map((_: OsStuff.FolderItem) => _.name));
     }
 
-    console.log(`targets ${JSON.stringify(targets, null, 4)}`);
+    //console.log(`targets ${JSON.stringify(targets, null, 4)}`);
 
     return targets;
 }

@@ -2,16 +2,17 @@ import { EOL } from 'os';
 
 type Context = {
     ccCount: number;
-    hasfixes: boolean;  // file has default hour timestamps (i.e. mm:ss,ms wo/ hh:)
-}
+    hasFixes: boolean;  // file has default hour timestamps (i.e. mm:ss,ms wo/ hh:)
+};
 
 const regFirstLine = new RegExp(`(WEBVTT\s*(FILE)?.*)(${EOL})*`, 'g');
 const reg2ItemsLine = /(\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2})\.(\d{3}\s*)/g;
 const reg3ItemsLine = /(\d{2}:\d{2}:\d{2})\.(\d{3}\s+)\-\-\>(\s+\d{2}:\d{2}:\d{2})\.(\d{3}\s*)/g;
 
-function convertTimestamp(item: string, context: Context) {
+function convertTimestamp(item: string, context: Context): string {
     item = item.replace('.', ',');      // '00:05.130 ' -> '00:05,130 ' || ' 00:10.350' -> ' 00:10,350'
     if (item.split(":").length < 3) {
+        context.hasFixes = true;
         item = '00:' + item.trim();     // '00:00:05,130' || '00:00:10,350'
     }
     return item;
@@ -64,8 +65,8 @@ export function convertVttToSrt(fileContent: string): string {
 
     const context: Context = {
         ccCount: 0,
-        hasfixes: false,
-    }
+        hasFixes: false,
+    };
 
     const lines = fileContent.split(/\r?\n/);
     return lines.map((line) => convertLine(line, context)).filter((line) => line !== undefined).join('');
