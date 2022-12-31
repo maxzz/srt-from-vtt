@@ -8,7 +8,7 @@ import { OsStuff } from '../utils/utils-os-stuff';
 import { notes } from './app-notes';
 import { newErrorArgs } from '../utils/utils-errors';
 import { Targets } from './app-types';
-import { convertVttToSrt } from '../utils/utils-vtt';
+import { ConvertAction, convertVttToSrt } from '../utils/utils-vtt';
 
 function handleVttFile(fname: string) {
     const isVtt = path.extname(fname).toLowerCase() === '.vtt';
@@ -17,7 +17,7 @@ function handleVttFile(fname: string) {
     }
 
     const cnt = fs.readFileSync(fname, { encoding: 'utf-8' });
-    const newCnt = convertVttToSrt(cnt, true);
+    const newCnt = convertVttToSrt(cnt, ConvertAction.convert);
     const newName = replaceExt(fname, '.srt');
 
     fs.writeFileSync(newName, newCnt.newContent);

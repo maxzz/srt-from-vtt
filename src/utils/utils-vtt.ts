@@ -81,7 +81,12 @@ export type ConvertResult = {
     hasFixes: boolean;
 };
 
-export function convertVttToSrt(fileContent: string, makeSrtOrFix: boolean): ConvertResult {
+export const enum ConvertAction {
+    convert,
+    fix
+}
+
+export function convertVttToSrt(fileContent: string, action: ConvertAction): ConvertResult {
 
     const context: Context = {
         ccCount: 0,
@@ -90,7 +95,7 @@ export function convertVttToSrt(fileContent: string, makeSrtOrFix: boolean): Con
 
     const lines = fileContent.split(/\r?\n/);
 
-    const newContent = makeSrtOrFix
+    const newContent = action === ConvertAction.convert
         ? lines.map((line) => convertLine(line, context)).filter((line) => line !== undefined).join('')
         : lines.map((line) => fixVttLine(line, context)).filter((line) => line !== undefined).join(EOL);
 
