@@ -1,0 +1,61 @@
+WEBVTT
+
+00:00.760 --> 00:05.110
+You can easily find necessary package on the MBM dot com.
+
+00:06.530 --> 00:12.940
+And, of course, more than seven hundred thousand packages and all of them are free.
+
+00:13.970 --> 00:22.340
+Let's find, for example, Bable Zeolite package, here it is, current version is six dot twenty six
+
+00:22.340 --> 00:23.060
+two zero.
+
+00:24.460 --> 00:26.920
+We the loss is half million.
+
+00:28.340 --> 00:32.840
+And here you can look at the dependencies of Babille Seelie, no.
+
+00:33.260 --> 00:36.180
+We'll talk about dependencies later on on the next step.
+
+00:36.380 --> 00:43.340
+You see that more than three thousand other packages depend on Bable Seelie package here down below
+
+00:43.350 --> 00:50.120
+on the right, you can click on the GitHub repository link and explore the contents of the package.
+
+00:51.170 --> 00:55.520
+For example, you can click on the legs and explore the contents of this file.
+
+00:56.600 --> 00:59.900
+Or go to the folder and explore the contents of this folder.
+
+01:00.770 --> 01:02.220
+Let's find another package.
+
+01:02.900 --> 01:04.190
+Let's go back to NPM.
+
+01:06.060 --> 01:08.370
+And let's search for wreckage.
+
+01:09.340 --> 01:14.840
+This package is downloaded more than one and a half million times each week.
+
+01:15.400 --> 01:23.700
+Current version is six hundred for the zero and more than twenty five thousand other packages depend
+
+01:23.710 --> 01:24.730
+on react.
+
+01:25.420 --> 01:26.320
+OK, let's move on.
+
+01:26.530 --> 01:29.950
+And next, let's talk about project initialization.
+
+01:30.490 --> 01:31.240
+See a short term.

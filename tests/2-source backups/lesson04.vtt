@@ -1,0 +1,121 @@
+WEBVTT
+
+00:00.270 --> 00:07.740
+If you want to create a public package or if different people work on the same project, then you need
+
+00:07.740 --> 00:11.880
+to create a package, the Jason file in the root of your project.
+
+00:13.000 --> 00:18.760
+If you don't plan to distribute your software and want to work on it just on your local computer, then
+
+00:18.760 --> 00:20.680
+you can go on without this file.
+
+00:21.920 --> 00:28.190
+Here is sample package, the Jason file, for example, it contains name of the project, my project
+
+00:28.190 --> 00:32.690
+and its version 1.0, the format is Jassal.
+
+00:33.020 --> 00:40.010
+So what does Jason Jason is JavaScript object annotation and it is format for data exchange.
+
+00:41.540 --> 00:49.700
+Jason Object contains key value pairs where Key is embedded into the quote, and it's very easy to convert
+
+00:49.700 --> 00:52.460
+Jason to JavaScript object and back.
+
+00:54.770 --> 01:03.050
+OK, how can you create a of Jason file, you can create it either manually or with the help of MBM
+
+01:03.050 --> 01:03.980
+or Young.
+
+01:05.450 --> 01:13.190
+There is a special command, gold and B.M. in it, or you are in it, and this command will guide you
+
+01:13.340 --> 01:20.570
+through the list of interactive prompts and you will set name of your project, such Burraston set out
+
+01:20.840 --> 01:21.470
+and so on.
+
+01:22.430 --> 01:24.320
+OK, let's try this for our project.
+
+01:25.750 --> 01:32.020
+Let's go to the terminal and just and in it in our project directory.
+
+01:32.320 --> 01:35.430
+So now I'm in Bable internal folder.
+
+01:35.530 --> 01:36.430
+So in a minute.
+
+01:37.380 --> 01:45.960
+So package, name it, the Bible intro version 1.0 zero and no description, entry point, let's leave
+
+01:45.960 --> 01:48.900
+it by default index dodgiest test command.
+
+01:49.020 --> 01:51.610
+We will admit it now git repository.
+
+01:51.750 --> 01:59.850
+Now it is not hosted ungeared enter no keywords, all just Mogadon and license.
+
+01:59.850 --> 02:01.640
+Icee is free license.
+
+02:02.220 --> 02:03.230
+Lets enter it.
+
+02:03.240 --> 02:03.930
+Is it ok?
+
+02:04.110 --> 02:04.530
+Yes.
+
+02:05.500 --> 02:12.070
+And now, as you will see, that package that Jason was created in the route of my project.
+
+02:13.450 --> 02:18.550
+Let's now open package the Jassam File Visual Studio code, so here it is.
+
+02:19.030 --> 02:23.840
+So here is the name of my project and it's one of the 020.
+
+02:24.650 --> 02:30.340
+OK, let's not look at the example of package, the design file in one of the public packages.
+
+02:30.970 --> 02:32.410
+Let's switch to Google Chrome.
+
+02:32.560 --> 02:37.810
+And here let's open package the Jassam for Bable Seelie package.
+
+02:39.490 --> 02:43.360
+So here is this file, here is the name of the project.
+
+02:43.660 --> 02:45.070
+Here is the current version.
+
+02:45.610 --> 02:55.360
+Description of home page license is also free license git repository for this package, keywords.
+
+02:55.960 --> 02:58.410
+And below, you'll see a list of dependencies.
+
+02:58.870 --> 02:59.440
+No worries.
+
+02:59.480 --> 03:01.030
+We'll talk about dependencies soon.
+
+03:02.050 --> 03:06.940
+Please note that each project and each dependency has Bertel.
+
+03:07.960 --> 03:10.630
+Let's talk about the now suing a second.

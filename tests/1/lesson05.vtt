@@ -1,0 +1,154 @@
+WEBVTT
+
+00:00.630 --> 00:02.970
+Let's talk about bycatch versus.
+
+00:04.050 --> 00:12.270
+It's very important concept for each public package must have unique name and version, and each time
+
+00:12.270 --> 00:15.630
+when you update package, you must update its version.
+
+00:17.220 --> 00:24.840
+And there was special agreement to set versions of the packages and it is called semantic versioning
+
+00:24.990 --> 00:27.060
+or shortly somewhere.
+
+00:28.410 --> 00:33.310
+If you want to read about this agreement, you can go to some of our dot org.
+
+00:33.660 --> 00:39.300
+And here is just a short piece of text where everything is described.
+
+00:40.530 --> 00:42.720
+Burzum consists of three parts.
+
+00:43.290 --> 00:46.770
+It's my version, Mindoro version and page.
+
+00:47.800 --> 00:50.770
+And those numbers are separated by DOT.
+
+00:51.700 --> 01:00.760
+So in this example, five is my daughter Barsoum, 21 is my Nerva and 17 is Petch, what those numbers
+
+01:00.760 --> 01:02.200
+mean and what is the difference?
+
+01:03.380 --> 01:11.230
+If you perform some bug fixes, then you need to change Bedrosian if you introduce some new features
+
+01:11.690 --> 01:18.260
+but your package remains compatible with previous versions, then you just update minor version.
+
+01:19.070 --> 01:24.300
+If you introduce some non-convertible features or change your project completely.
+
+01:25.040 --> 01:27.220
+Then you need to change your version.
+
+01:28.250 --> 01:35.320
+If other packages depend on your package and if you update your version, then you don't guarantee that
+
+01:35.510 --> 01:38.410
+new updated version will work as before.
+
+01:39.050 --> 01:44.930
+If your package depends on external package, then you can specify which version of external package
+
+01:44.930 --> 01:45.500
+you need.
+
+01:46.510 --> 01:53.220
+If you need exact version, then you need to type it like five 21. 17 exact version.
+
+01:54.200 --> 02:01.850
+If version may be greater than specific volume, then you need to add greater than sign before version.
+
+02:03.140 --> 02:09.830
+If you accept only compatible changes of Extoll package, then you need to use Syntex like this Garratt
+
+02:10.100 --> 02:20.480
+five, the 21. eight, in this case 21, it's Mindoro and a dispatch motion may change, but major version
+
+02:20.480 --> 02:21.650
+five is fixed.
+
+02:23.170 --> 02:31.270
+If you accept only minor level changes, then you need to use syntax like the five the 21 dot ed, in
+
+02:31.270 --> 02:34.470
+this case, only version may change.
+
+02:35.710 --> 02:43.990
+There are also Brett Earley's versions of Alpha, Beta and release candidate, they are added after
+
+02:43.990 --> 02:48.760
+the version, like in this example, 1.0 to the iPhone.
+
+02:50.030 --> 02:53.990
+This Alpha version is older than Alpha, one of our.
+
+02:55.230 --> 02:58.730
+This version is older than the better version.
+
+02:59.920 --> 03:03.730
+And the way is older than better dot to version.
+
+03:04.760 --> 03:12.650
+And this one is older than 11 and better versions are older than ARACY released, can today's.
+
+03:13.690 --> 03:18.640
+And finally, you release Burraston without any suffixes.
+
+03:20.040 --> 03:23.050
+Let's now look at the package version of the public package.
+
+03:23.550 --> 03:28.830
+Let's go back to Bill Graham and he'll look at the package, the Jason file of Bable Selya.
+
+03:29.400 --> 03:31.350
+And what is this one?
+
+03:32.280 --> 03:35.170
+So it is seven zero zero.
+
+03:35.230 --> 03:39.660
+That's better not 51, so seven is my release.
+
+03:39.900 --> 03:41.730
+Zero is minor release.
+
+03:42.030 --> 03:43.760
+Zero is Page.
+
+03:44.100 --> 03:49.170
+And here you see better and it is 50 better version.
+
+03:50.380 --> 03:57.190
+So then it will become a candidate and finally, Boston seven zero two zero will be released.
+
+03:58.530 --> 04:06.480
+If we will look at the dependencies below, you will see that this Bable Scilly package requires commander
+
+04:06.480 --> 04:06.960
+package.
+
+04:08.080 --> 04:17.860
+That is compatible with two, that one, so it means that this minor operation may change and this operation
+
+04:17.890 --> 04:18.490
+may change.
+
+04:19.490 --> 04:28.220
+So say, for example, with Glaube package, we need to stay inside of the silent majority is in effect.
+
+04:28.220 --> 04:31.570
+All dependencies have Garratt before.
+
+04:31.620 --> 04:37.130
+But no, it means that we install all the compatible updates.
+
+04:38.290 --> 04:43.750
+OK, let's move on and next, let's talk about installation of the packages you.
